@@ -138,7 +138,7 @@ export default class MessageContainer extends React.Component {
   render() {
     return (
       <View ref='container' style={{flex:1}}>
-        <ListView
+        <ListView contentContainerStyle={{ flexGrow: 1, justifyContent: 'flex-end' }}
           enableEmptySections={true}
           keyboardShouldPersistTaps={'always'}
           automaticallyAdjustContentInsets={false}
