@@ -68,7 +68,7 @@ class GiftedChat extends React.Component {
 
     this.invertibleScrollViewProps = {
       inverted: true,
-      keyboardShouldPersistTaps: 'always',
+      keyboardShouldPersistTaps: true,
       onTouchStart: this.onTouchStart,
       onTouchMove: this.onTouchMove,
       onTouchEnd: this.onTouchEnd,
