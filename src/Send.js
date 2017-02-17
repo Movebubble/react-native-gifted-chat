@@ -12,7 +12,7 @@ export default class Send extends React.Component {
   //     return true;
   //   }
   //   return false;
-  // }
+  // } .
   render() {
     if (this.props.text.trim().length > 0) {
       return (
@@ -27,7 +27,9 @@ export default class Send extends React.Component {
         </TouchableOpacity>
       );
     }
-    return <View/>;
+    return <View style={[styles.container, this.props.containerStyle, this.props.disabledStyle]}>
+      <Text style={[styles.text, this.props.textStyle]}>{this.props.label}</Text>
+    </View>;
   }
 }
 
@@ -53,6 +55,7 @@ Send.defaultProps = {
   label: 'Send',
   containerStyle: {},
   textStyle: {},
+  backgroundStyle: {enabled: null, disabled: null }
 };
 
 Send.propTypes = {
