@@ -311,7 +311,7 @@ class GiftedChat extends React.Component {
         ...message,
         user: this.props.user,
         createdAt: new Date(),
-        status: "sending…",
+        posted: false,
         _id: 'temp-id-' + Math.round(Math.random() * 1000000),
       };
     });

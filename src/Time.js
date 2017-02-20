@@ -8,9 +8,13 @@ import {
 import moment from 'moment/min/moment-with-locales.min';
 
 export default class Time extends React.Component {
-  let status = this.props.currentMessage.status;
-  if (status !== "sending…") {
-    status += " " + moment(this.props.currentMessage.createdAt).locale(this.context.getLocale()).format('LT');
+  let status;
+  if (!this.props.currentMessage.posted) {
+    status = "sending…";
+  } else if (this.props.user._id === this.props.currentMessage.user._id) {
+    status = "sent " + moment(this.props.currentMessage.createdAt).locale(this.context.getLocale()).format('LT');
+  } else if (this.props.currentMessage.user._id) {
+    status = "received " + moment(this.props.currentMessage.createdAt).locale(this.context.getLocale()).format('LT');
   }
   render() {
     return (
