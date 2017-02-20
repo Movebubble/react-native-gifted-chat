@@ -26,11 +26,7 @@ export default class Avatar extends React.Component {
   render() {
     if (isSameUser(this.props.currentMessage, this.props.nextMessage) && isSameDay(this.props.currentMessage, this.props.nextMessage)) {
       return (
-        <View style={[styles[this.props.position].container, this.props.containerStyle[this.props.position]]}>
-          <GiftedAvatar
-            avatarStyle={StyleSheet.flatten([styles[this.props.position].image, this.props.imageStyle[this.props.position]])}
-          />
-        </View>
+        <View style={[styles[this.props.position].container, this.props.containerStyle[this.props.position]]}/>
       );
     }
     return (
@@ -45,6 +41,7 @@ const styles = {
   left: StyleSheet.create({
     container: {
       marginRight: 8,
+      width: 36,
     },
     image: {
       height: 36,

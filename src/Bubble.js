@@ -55,6 +55,9 @@ export default class Bubble extends React.Component {
   }
 
   renderTime() {
+    if (isSameUser(this.props.currentMessage, this.props.nextMessage) && isSameDay(this.props.currentMessage, this.props.nextMessage)) {
+      return null;
+    }
     if (this.props.currentMessage.createdAt) {
       const {containerStyle, wrapperStyle, ...timeProps} = this.props;
       if (this.props.renderTime) {
@@ -110,10 +113,10 @@ export default class Bubble extends React.Component {
               {this.renderCustomView()}
               {this.renderMessageImage()}
               {this.renderMessageText()}
-              {this.renderTime()}
             </View>
           </TouchableWithoutFeedback>
         </View>
+        {this.renderTime()}
       </View>
     );
   }
@@ -126,17 +129,17 @@ const styles = {
       alignItems: 'flex-start',
     },
     wrapper: {
-      borderRadius: 15,
+      borderRadius: 8,
       backgroundColor: '#f0f0f0',
       marginRight: 60,
       minHeight: 20,
       justifyContent: 'flex-end',
     },
     containerToNext: {
-      borderBottomLeftRadius: 3,
+      borderBottomLeftRadius: 2,
     },
     containerToPrevious: {
-      borderTopLeftRadius: 3,
+      borderTopLeftRadius: 2,
     },
   }),
   right: StyleSheet.create({
@@ -145,17 +148,17 @@ const styles = {
       alignItems: 'flex-end',
     },
     wrapper: {
-      borderRadius: 15,
+      borderRadius: 8,
       backgroundColor: '#0084ff',
       marginLeft: 60,
       minHeight: 20,
       justifyContent: 'flex-end',
     },
     containerToNext: {
-      borderBottomRightRadius: 3,
+      borderBottomRightRadius: 2,
     },
     containerToPrevious: {
-      borderTopRightRadius: 3,
+      borderTopRightRadius: 2,
     },
   }),
 };

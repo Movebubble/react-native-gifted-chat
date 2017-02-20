@@ -8,11 +8,15 @@ import {
 import moment from 'moment/min/moment-with-locales.min';
 
 export default class Time extends React.Component {
+  let status = this.props.currentMessage.status;
+  if (status !== "sending…") {
+    status += " " + moment(this.props.currentMessage.createdAt).locale(this.context.getLocale()).format('LT');
+  }
   render() {
     return (
       <View style={[styles[this.props.position].container, this.props.containerStyle[this.props.position]]}>
         <Text style={[styles[this.props.position].text, this.props.textStyle[this.props.position]]}>
-          {moment(this.props.currentMessage.createdAt).locale(this.context.getLocale()).format('LT')}
+          {status}
         </Text>
       </View>
     );
@@ -20,8 +24,6 @@ export default class Time extends React.Component {
 }
 
 const containerStyle = {
-  marginLeft: 10,
-  marginRight: 10,
   marginBottom: 5,
 };
 
