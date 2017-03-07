@@ -133,7 +133,7 @@ const styles = {
       backgroundColor: '#f0f0f0',
       marginRight: 60,
       minHeight: 25,
-      justifyContent: 'flex-start',
+      justifyContent: 'flex-end',
     },
     containerToNext: {
       borderBottomLeftRadius: 2,
