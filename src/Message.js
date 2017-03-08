@@ -78,7 +78,7 @@ const styles = {
   left: StyleSheet.create({
     container: {
       flexDirection: 'row',
-      alignItems: 'flex-start',
+      alignItems: 'flex-end',
       justifyContent: 'flex-start',
       marginLeft: 8,
       marginRight: 0,
