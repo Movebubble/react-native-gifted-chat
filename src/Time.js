@@ -11,11 +11,11 @@ export default class Time extends React.Component {
   render() {
     let status;
     if (!this.props.currentMessage.posted) {
-      status = "sending…";
+      status = "Sending…";
     } else if (this.props.user._id === this.props.currentMessage.user._id) {
-      status = "sent " + moment(this.props.currentMessage.createdAt).locale(this.context.getLocale()).format('LT');
+      status = "Sent " + moment(this.props.currentMessage.createdAt).locale(this.context.getLocale()).format('LT');
     } else if (this.props.currentMessage.user._id) {
-      status = "received " + moment(this.props.currentMessage.createdAt).locale(this.context.getLocale()).format('LT');
+      status = "Received " + moment(this.props.currentMessage.createdAt).locale(this.context.getLocale()).format('LT');
     }
     return (
       <View style={[styles[this.props.position].container, this.props.containerStyle[this.props.position]]}>

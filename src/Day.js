@@ -11,12 +11,14 @@ import { isSameDay, isSameUser, warnDeprecated } from './utils';
 
 export default class Day extends React.Component {
   render() {
+    let time = moment(this.props.currentMessage.createdAt).locale(this.context.getLocale());
     if (!isSameDay(this.props.currentMessage, this.props.previousMessage)) {
       return (
         <View style={[styles.container, this.props.containerStyle]}>
           <View style={[styles.wrapper, this.props.wrapperStyle]}>
             <Text style={[styles.text, this.props.textStyle]}>
-              {moment(this.props.currentMessage.createdAt).locale(this.context.getLocale()).format('ll').toUpperCase()}
+              <Text style={styles.bold}>{time.format('dddd')}</Text>
+              <Text style={styles.smaller}>{time.format(', D MMMM')}</Text>
             </Text>
           </View>
         </View>
@@ -32,6 +34,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     marginTop: 5,
     marginBottom: 10,
+  },
+  bold: {
+    fontWeight: 'bold'
+  },
+  smaller: {
+    fontWeight: '400'
   },
   wrapper: {
     // backgroundColor: '#ccc',
