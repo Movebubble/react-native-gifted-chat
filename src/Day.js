@@ -31,9 +31,7 @@ export default class Day extends React.Component {
 const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
-    justifyContent: 'center',
-    marginTop: 5,
-    marginBottom: 10,
+    justifyContent: 'center'
   },
   bold: {
     fontWeight: 'bold'
