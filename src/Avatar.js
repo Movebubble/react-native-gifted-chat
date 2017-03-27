@@ -7,7 +7,7 @@ import {
 
 import GiftedAvatar from './GiftedAvatar';
 
-import { isSameUser, isSameDay, warnDeprecated } from './utils';
+import { isSameUser, isSameDay, isSystemMessage, warnDeprecated } from './utils';
 
 export default class Avatar extends React.Component {
   renderAvatar() {
@@ -24,7 +24,7 @@ export default class Avatar extends React.Component {
   }
 
   render() {
-    if (isSameUser(this.props.currentMessage, this.props.nextMessage) && isSameDay(this.props.currentMessage, this.props.nextMessage)) {
+    if (isSameUser(this.props.currentMessage, this.props.nextMessage) && isSameDay(this.props.currentMessage, this.props.nextMessage) && !isSystemMessage(this.props.currentMessage)) {
       return (
         <View style={[styles[this.props.position].container, this.props.containerStyle[this.props.position]]}/>
       );

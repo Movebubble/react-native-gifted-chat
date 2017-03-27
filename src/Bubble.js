@@ -10,7 +10,7 @@ import MessageText from './MessageText';
 import MessageImage from './MessageImage';
 import Time from './Time';
 
-import { isSameUser, isSameDay, warnDeprecated } from './utils';
+import { isSameUser, isSameDay, isRecent, isSystemMessage, warnDeprecated } from './utils';
 
 export default class Bubble extends React.Component {
   constructor(props) {
@@ -55,7 +55,7 @@ export default class Bubble extends React.Component {
   }
 
   renderTime() {
-    if (isSameUser(this.props.currentMessage, this.props.nextMessage) && isSameDay(this.props.currentMessage, this.props.nextMessage)) {
+    if (isSameUser(this.props.currentMessage, this.props.nextMessage) && isRecent(this.props.currentMessage, this.props.nextMessage) && !isSystemMessage(this.props.currentMessage)) {
       return null;
     }
     if (this.props.currentMessage.createdAt) {
