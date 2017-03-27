@@ -63,7 +63,7 @@ export default class Message extends React.Component {
       <View>
         {this.renderDay()}
         <View style={[styles[this.props.position].container, {
-          marginBottom: isSameUser(this.props.currentMessage, this.props.nextMessage) ? 2 : 10,
+          marginBottom: isSameUser(this.props.currentMessage, this.props.nextMessage) ? 4 : 8,
         }, this.props.containerStyle[this.props.position]]}>
           {this.props.position === 'left' ? this.renderAvatar() : null}
           {this.renderBubble()}
@@ -80,7 +80,7 @@ const styles = {
       flexDirection: 'row',
       alignItems: 'flex-end',
       justifyContent: 'flex-start',
-      marginLeft: 8,
+      marginLeft: 16,
       marginRight: 0,
     },
   }),
@@ -90,7 +90,7 @@ const styles = {
       alignItems: 'flex-end',
       justifyContent: 'flex-end',
       marginLeft: 0,
-      marginRight: 8,
+      marginRight: 16,
     },
   }),
 };
