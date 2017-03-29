@@ -13,9 +13,9 @@ export default class Time extends React.Component {
     if (!this.props.currentMessage.posted) {
       status = "Sending…";
     } else if (this.props.user._id === this.props.currentMessage.user._id) {
-      status = "Sent " + moment(this.props.currentMessage.createdAt).locale(this.context.getLocale()).format('LT');
+      status = "Sent " + moment(this.props.currentMessage.createdAt).locale(this.context.getLocale()).format('h:mma');
     } else if (this.props.currentMessage.user._id) {
-      status = "Received " + moment(this.props.currentMessage.createdAt).locale(this.context.getLocale()).format('LT');
+      status = "Received " + moment(this.props.currentMessage.createdAt).locale(this.context.getLocale()).format('h:mma');
     }
     return (
       <View style={[styles[this.props.position].container, this.props.containerStyle[this.props.position]]}>
