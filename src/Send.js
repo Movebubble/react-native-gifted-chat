@@ -42,10 +42,7 @@ const styles = StyleSheet.create({
     color: '#0084ff',
     fontWeight: '600',
     fontSize: 17,
-    backgroundColor: 'transparent',
-    marginBottom: 12,
-    marginLeft: 10,
-    marginRight: 10,
+    backgroundColor: 'transparent'
   },
 });
 
