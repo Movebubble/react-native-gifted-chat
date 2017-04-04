@@ -19,14 +19,14 @@ export default class Bubble extends React.Component {
   }
 
   handleBubbleToNext() {
-    if (isSameUser(this.props.currentMessage, this.props.nextMessage) && isSameDay(this.props.currentMessage, this.props.nextMessage)) {
+    if (isSameUser(this.props.currentMessage, this.props.nextMessage) && isSameDay(this.props.currentMessage, this.props.nextMessage) && isRecent(this.props.currentMessage, this.props.nextMessage)) {
       return StyleSheet.flatten([styles[this.props.position].containerToNext, this.props.containerToNextStyle[this.props.position]]);
     }
     return null;
   }
 
   handleBubbleToPrevious() {
-    if (isSameUser(this.props.currentMessage, this.props.previousMessage) && isSameDay(this.props.currentMessage, this.props.previousMessage)) {
+    if (isSameUser(this.props.currentMessage, this.props.previousMessage) && isSameDay(this.props.currentMessage, this.props.previousMessage) && isRecent(this.props.previousMessage, this.props.currentMessage)) {
       return StyleSheet.flatten([styles[this.props.position].containerToPrevious, this.props.containerToPreviousStyle[this.props.position]]);
     }
     return null;
