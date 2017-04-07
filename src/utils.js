@@ -1,7 +1,7 @@
 import moment from 'moment';
 
 const DEPRECATION_MESSAGE = 'isSameUser and isSameDay should be imported from the utils module instead of using the props functions';
-const SYSTEM_MESSAGE_TYPES = ['Viewing', 'Property'];
+const SYSTEM_MESSAGE_TYPES = ['Viewing', 'Property', 'Offers'];
 
 export function isSameDay(currentMessage = {}, diffMessage = {}) {
 
