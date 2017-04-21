@@ -127,6 +127,7 @@ const styles = {
     container: {
       flex: 1,
       alignItems: 'flex-start',
+      maxWidth: 280,
     },
     wrapper: {
       borderRadius: 8,
@@ -146,6 +147,7 @@ const styles = {
     container: {
       flex: 1,
       alignItems: 'flex-end',
+      maxWidth: 280,
     },
     wrapper: {
       borderRadius: 8,
