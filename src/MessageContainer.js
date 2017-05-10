@@ -141,10 +141,11 @@ export default class MessageContainer extends React.Component {
         <ListView
           contentContainerStyle={{ flexGrow: 1, justifyContent: 'flex-end' }}
           enableEmptySections={true}
-          keyboardShouldPersistTaps={true}
+          keyboardShouldPersistTaps='always'
           automaticallyAdjustContentInsets={false}
           initialListSize={20}
           pageSize={20}
+          {...this.props.listViewProps}
           dataSource={this.state.dataSource}
           renderRow={this.renderRow}
           renderHeader={this.renderFooter}
@@ -161,6 +162,7 @@ MessageContainer.defaultProps = {
   user: {},
   renderFooter: null,
   renderMessage: null,
+  listViewProps: {},
   onLoadEarlier: () => {
   },
 };
@@ -171,4 +173,5 @@ MessageContainer.propTypes = {
   renderFooter: React.PropTypes.func,
   renderMessage: React.PropTypes.func,
   onLoadEarlier: React.PropTypes.func,
+  listViewProps: React.PropTypes.object,
 };
