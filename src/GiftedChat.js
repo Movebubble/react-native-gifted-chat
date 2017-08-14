@@ -5,6 +5,8 @@ import {
   Platform,
   StyleSheet,
   View,
+  LayoutAnimation,
+  Keyboard,
 } from 'react-native';
 
 import ActionSheet from '@expo/react-native-action-sheet';
@@ -27,6 +29,20 @@ import Send from './Send';
 import Time from './Time';
 import GiftedAvatar from './GiftedAvatar';
 import GiftedChatInteractionManager from './GiftedChatInteractionManager';
+
+// From: https://medium.com/man-moon/writing-modern-react-native-ui-e317ff956f02
+const defaultAnimation = {
+  duration: 500,
+  create: {
+    duration: 300,
+    type: LayoutAnimation.Types.easeInEaseOut,
+    property: LayoutAnimation.Properties.opacity
+  },
+  update: {
+    type: LayoutAnimation.Types.spring,
+    springDamping: 200
+  }
+};
 
 // Min and max heights of ToolbarInput and Composer
 // Needed for Composer auto grow and ScrollView animation
@@ -71,7 +87,8 @@ class GiftedChat extends React.Component {
     this.onInputTextChanged = this.onInputTextChanged.bind(this);
     this.onMainViewLayout = this.onMainViewLayout.bind(this);
     this.onInitialLayoutViewLayout = this.onInitialLayoutViewLayout.bind(this);
-
+    this.updateKeyboardSpace = this.updateKeyboardSpace.bind(this);
+    this.resetKeyboardSpace = this.resetKeyboardSpace.bind(this);
 
     this.invertibleScrollViewProps = {
       inverted: true,
@@ -108,14 +125,30 @@ class GiftedChat extends React.Component {
     this.setIsMounted(true);
     this.initLocale();
     this.initMessages(this.props.messages);
+    
+    const updateListener = Platform.OS === 'android' ? 'keyboardDidShow' : 'keyboardWillShow';
+    const resetListener = Platform.OS === 'android' ? 'keyboardDidHide' : 'keyboardWillHide';
+    this._listeners = [
+      Keyboard.addListener(updateListener, this.updateKeyboardSpace),
+      Keyboard.addListener(resetListener, this.resetKeyboardSpace)
+    ];
   }
 
   componentWillUnmount() {
     this.setIsMounted(false);
+    this._listeners.forEach(listener => listener.remove());
   }
 
   componentWillReceiveProps(nextProps = {}) {
     this.initMessages(nextProps.messages);
+  }
+
+  updateKeyboardSpace(e) {
+    this._cachedKeyboardEvent = e;
+  }
+
+  resetKeyboardSpace(e) {
+    this._cachedKeyboardEvent = e;
   }
 
   initLocale() {
@@ -159,6 +192,9 @@ class GiftedChat extends React.Component {
   }
 
   getKeyboardHeight() {
+    if (this.props.useLayoutAnimation) {
+      return 0;
+    }
     if (Platform.OS === 'android') {
       // For android: on-screen keyboard resized main container and has own height.
       // @see https://developer.android.com/training/keyboard-input/visibility.html
@@ -400,6 +436,21 @@ class GiftedChat extends React.Component {
       this.setState({
         messagesContainerHeight: this.prepareMessagesContainerHeight(this.getBasicMessagesContainerHeight()),
       });
+      
+      const { _cachedKeyboardEvent: event } = this;
+
+      if (event && this.props.useLayoutAnimation) {
+        let animationConfig = defaultAnimation;
+        if (Platform.OS === 'ios') {
+          animationConfig = LayoutAnimation.create(
+            event.duration,
+            LayoutAnimation.Types[event.easing],
+            LayoutAnimation.Properties.opacity,
+          );
+        }
+        LayoutAnimation.configureNext(animationConfig);
+      }
+      
     }
     if (this.getIsFirstLayout() === true) {
       this.setIsFirstLayout(false);
